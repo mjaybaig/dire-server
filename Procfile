@@ -1,1 +1,1 @@
-python: pip install -r requirements.txt && gunicorn flaskr:app -b 0.0.0.0:5000
+python: pip install -r requirements.txt && gunicorn flaskr:create_app -b 0.0.0.0:5000
