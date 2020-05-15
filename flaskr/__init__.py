@@ -7,7 +7,12 @@ from bs4 import BeautifulSoup
 import geohash
 import re
 
-def get_uv_data(date):
+
+app = Flask(__name__)
+
+@app.route('/api/uv')
+def get_uv_data():
+    date = requests.args.get('date')
     response = urlopen('ftp://ftp2.bom.gov.au/anon/gen/fwo/IDZ00112.xml')
     soup = BeautifulSoup(response, 'xml')
 
@@ -26,7 +31,6 @@ def get_uv_data(date):
             "protection_times": None if prot_time is None else (prot_time[0], prot_time[1])
         })
 
-    print(date)
     params = {
         'longitude':'145.1',
         'latitude': '-37.73',
@@ -41,10 +45,9 @@ def get_uv_data(date):
         'current': currUvRes,
         'forecast': uvforecasts
     }
-    return response
+    return json.dumps(response)
 
 
-app = Flask(__name__)
 
 @app.route('/api/3hourly')
 def threehourly():
@@ -58,11 +61,18 @@ def threehourly():
     return json.dumps(forecast.json())
 
 
-@app.route('/api/uv')
-def hello():
-    print("recieved request")
-    print()
-    return json.dumps(get_uv_data(request.args.get('date')))
+@app.route('/api/daily')
+def daily():
+    coords = {
+        'lat': float(request.args.get('lat')),
+        'long': float(request.args.get('long'))
+    }
+    hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
+    forecast = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/daily')
+
+    return json.dumps(forecast.json())
+
+
 
 # return app
 if __name__ == '__main__':
