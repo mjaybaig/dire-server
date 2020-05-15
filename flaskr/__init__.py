@@ -4,6 +4,7 @@ from flask import Flask, request
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import geohash
 import re
 
 def get_uv_data(date):
@@ -42,24 +43,22 @@ def get_uv_data(date):
     }
     return response
 
-# def create_app(test_config=None):
-# print("Hello")
+
 app = Flask(__name__)
-# app.config.from_mapping(
-#     SECRET_KEY='dev',
-#     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite')
-# )
 
-# if test_config is None:
-#     app.config.from_pyfile('config.py', silent=True)
+@app.route('/api/3hourly')
+def threehourly():
+    coords = {
+        'lat': request.args.get('lat'),
+        'long': request.arg.get('long')
+    }
+    hashgeo = geohash.encode(coords['lat'], coords['long'])
+    forecast = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
 
-# try:
-#     os.makedirs(app.instance_path)
-# except OSError:
-#     pass
+    return json.dumps(forecast)
 
 
-@app.route('/')
+@app.route('/api/uv')
 def hello():
     print("recieved request")
     print()
