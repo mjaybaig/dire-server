@@ -49,13 +49,13 @@ app = Flask(__name__)
 @app.route('/api/3hourly')
 def threehourly():
     coords = {
-        'lat': request.args.get('lat'),
-        'long': request.arg.get('long')
+        'lat': float(request.args.get('lat')),
+        'long': float(request.args.get('long'))
     }
-    hashgeo = geohash.encode(coords['lat'], coords['long'])
+    hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
     forecast = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
 
-    return json.dumps(forecast)
+    return json.dumps(forecast.json())
 
 
 @app.route('/api/uv')
