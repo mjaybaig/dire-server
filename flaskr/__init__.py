@@ -56,9 +56,9 @@ def threehourly():
         'long': float(request.args.get('long'))
     }
     hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
-    forecast = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
+    forecastt = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
 
-    return forecast.json()
+    return forecastt.json()
     # return json.dumps(forecast.json())
 
 
@@ -70,7 +70,6 @@ def daily():
     }
     hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
     forecast = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/daily')
-
     return forecast.json()
     # return json.dumps(forecast.json())
 
