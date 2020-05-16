@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/api/uv')
 def get_uv_data():
-    date = requests.args.get('date')
+    date = request.args.get('date')
     response = urlopen('ftp://ftp2.bom.gov.au/anon/gen/fwo/IDZ00112.xml')
     soup = BeautifulSoup(response, 'xml')
 
