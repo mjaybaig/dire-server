@@ -62,7 +62,7 @@ def threehourly():
         'code': '10000'
     })
 
-    # return forecastt.json()
+    return forecastt.json()
     # # return json.dumps(forecast.json())
 
 
