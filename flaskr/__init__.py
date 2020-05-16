@@ -57,10 +57,10 @@ def threehourly():
     }
     hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
     forecastt = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
-    print(forecastt.json())
-    return json.dumps({
-        'code': '10000'
-    })
+    # print(forecastt.json())
+    # return json.dumps({
+    #     'code': '10000'
+    # })
 
     return forecastt.json()
     # # return json.dumps(forecast.json())
