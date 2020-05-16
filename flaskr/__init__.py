@@ -51,15 +51,18 @@ def get_uv_data():
 
 @app.route('/api/3hourly')
 def threehourly():
-    coords = {
-        'lat': float(request.args.get('lat')),
-        'long': float(request.args.get('long'))
-    }
-    hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
-    forecastt = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
+    # coords = {
+    #     'lat': float(request.args.get('lat')),
+    #     'long': float(request.args.get('long'))
+    # }
+    return json.dumps({
+        'code': '10000'
+    })
+    # hashgeo = geohash.encode(coords['lat'], coords['long'])[:6]
+    # forecastt = requests.get(f'https://api.weather.bom.gov.au/v1/locations/{hashgeo}/forecasts/3-hourly')
 
-    return forecastt.json()
-    # return json.dumps(forecast.json())
+    # return forecastt.json()
+    # # return json.dumps(forecast.json())
 
 
 @app.route('/api/daily')
