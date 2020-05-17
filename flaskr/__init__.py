@@ -63,7 +63,8 @@ def threehourly():
     # return json.dumps({
     #     'code': '10000'
     # })
-    print(f'Returning Object {forecastt.json()}')
+    print(f'Returning Object :')
+    print(f'{forecastt.json()}')
     return forecastt.json()
     # # return json.dumps(forecast.json())
 
