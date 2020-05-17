@@ -69,7 +69,7 @@ def threehourly():
         return forecastt.json()
     except Exception:
         print("Exception")
-        print(forecastt)
+        print(forecastt.text)
         return json.dumps({"error": "Invalid data"})
     # # return json.dumps(forecast.json())
 
