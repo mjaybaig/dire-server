@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request
+from flask import Flask, request, render_template
 import requests
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -11,7 +11,9 @@ import re
 app = Flask(__name__)
 
 @app.route('/index')
-def get_web():
+def get_web(name=None):
+    return render_template('main.html')
+
 
 @app.route('/api/uv')
 def get_uv_data():
