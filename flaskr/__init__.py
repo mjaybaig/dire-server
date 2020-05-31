@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/index')
 def get_web(name=None):
-    return render_template('main.html')
+    return render_template('index.html')
 
 
 @app.route('/api/uv')
