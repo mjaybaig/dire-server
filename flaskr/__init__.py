@@ -10,6 +10,9 @@ import re
 
 app = Flask(__name__)
 
+@app.route('/index')
+def get_web():
+
 @app.route('/api/uv')
 def get_uv_data():
     date = request.args.get('date')
