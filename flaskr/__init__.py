@@ -12,7 +12,7 @@ app = Flask(__name__, static_folder='assets')
 
 @app.route('/index')
 def get_web(name=None):
-    return render_template('startbootstrap-landing-page/index.html')
+    return render_template('index.html')
 
 
 @app.route('/api/uv')
